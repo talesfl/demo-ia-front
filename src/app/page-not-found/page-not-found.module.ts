@@ -6,7 +6,6 @@ import { PageNotFoundComponent } from './page-not-found.component';
 
 import { DemoToolbarModule } from '../demo-toolbar/demo-toolbar.module';
 
-
 @NgModule({
   declarations: [
     PageNotFoundComponent
