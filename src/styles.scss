@@ -18,10 +18,23 @@ mat-toolbar {
     flex-direction: column;
     
     .app-content {
-        height: inherit;
         margin: 12px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        flex-grow: 1;
+
+        .form-flex-layout {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            width: 40%;
+            min-width: 30%;
+            box-shadow: 3px 3px 3px 2px #ccc;
+        }
+    }
+
+    .preenchimento-03 {
+        flex-grow: .3;
     }
 }
