@@ -5,12 +5,14 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 
 import { DemoToolbarModule } from '../demo-toolbar/demo-toolbar.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [LoginComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     DemoToolbarModule,
     LoginRoutingModule
   ]

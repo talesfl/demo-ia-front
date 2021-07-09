@@ -1,1 +1,27 @@
-<app-demo-toolbar title="Login"></app-demo-toolbar>
+<div class="app-container">
+    <app-demo-toolbar title="Login"></app-demo-toolbar>
+
+    <div class="app-content">
+
+        <div class="preenchimento-03"></div>
+
+        <form [formGroup]="formGroup" class="form-flex-layout">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Login</mat-label>
+                <input matInput formControlName="login" required>
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" required>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary">Login</button>
+
+        </form>
+        
+
+    </div>
+
+</div>
