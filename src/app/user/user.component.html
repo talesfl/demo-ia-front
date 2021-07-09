@@ -1,8 +1,8 @@
-<app-demo-toolbar [title]="'User'">
+<app-demo-toolbar title="User">
 
     <!-- TODO: retirar o valor hardcoded -->
-    <button mat-stroked-button [routerLink]="['details/joao']">Details</button>
-    <button mat-stroked-button [routerLink]="['management']">Management</button>
+    <button mat-stroked-button routerLink="details/joao">Details</button>
+    <button mat-stroked-button routerLink="management">Management</button>
 </app-demo-toolbar>
 
 <router-outlet></router-outlet>
