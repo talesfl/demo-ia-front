@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  public hide: boolean = true;
   public formGroup: FormGroup;
 
   constructor(
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   private buildFormGroup(): FormGroup {
     return this.formBuilder.group({
-      login: [null, Validators.required],
+      email: [null, Validators.required],
       password: [null, Validators.required],
     });
   }
