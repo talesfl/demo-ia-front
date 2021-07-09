@@ -28,9 +28,13 @@ export class DetailsComponent implements OnInit {
       password: [{ value: null, disabled: true }, Validators.required],
       createDate: [{ value: null, disabled: true }, Validators.required],
       updateDate: [{ value: null, disabled: true }, Validators.required],
-      email: [{ value: null, disabled: false }, Validators.required],
+      email: [{ value: null, disabled: false }, Validators.compose([Validators.required, Validators.email])],
       admin: [{ value: false, disabled: true }, Validators.required],
     });
+  }
+
+  public resetFormGroup(): void {
+    this.formGroup.reset({ admin: false });
   }
 
 }
