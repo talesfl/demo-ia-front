@@ -23,13 +23,13 @@ export class DetailsComponent implements OnInit {
   private buildFormGroup(): FormGroup {
     return this.formBuilder.group({
       id: [null],
-      name: [null, Validators.required],
-      login: [null, Validators.required],
-      password: [null, Validators.required],
-      createDate: [null],
-      updateDate: [null],
-      email: [null, Validators.required],
-      admin: [false, Validators.required]
+      name: [{ value: null, disabled: false }, Validators.required],
+      login: [{ value: null, disabled: false }, Validators.required],
+      password: [{ value: null, disabled: true }, Validators.required],
+      createDate: [{ value: null, disabled: true }, Validators.required],
+      updateDate: [{ value: null, disabled: true }, Validators.required],
+      email: [{ value: null, disabled: false }, Validators.required],
+      admin: [{ value: false, disabled: true }, Validators.required],
     });
   }
 
