@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationGuard } from './guard/authentication.guard';
-import { AuthorizationGuard } from './guard/authorization.guard';
 
 const routes: Routes = [
   {
@@ -14,14 +13,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'user-details/:login',
-    loadChildren: () => import('./user-details/user-details.module').then(m => m.UserDetailsModule),
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then(m => m.UserModule),
     canActivate: [ AuthenticationGuard ]
-  },
-  {
-    path: 'user-management',
-    loadChildren: () => import('./user-management/user-management.module').then(m => m.UserManagementModule),
-    canActivate: [ AuthenticationGuard, AuthorizationGuard ]
   },
   {
     path: '**',
