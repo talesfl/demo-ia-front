@@ -1,5 +1,5 @@
 <div class="app-container">
-    <app-demo-toolbar title="Login"></app-demo-toolbar>
+    <app-demo-toolbar title="Log in"></app-demo-toolbar>
 
     <div class="app-content">
 
@@ -7,12 +7,12 @@
 
         <form [formGroup]="formGroup" class="form-flex-layout">
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="fill">
                 <mat-label>E-mail</mat-label>
                 <input matInput formControlName="email" required>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
                 <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
