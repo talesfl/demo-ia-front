@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
-import { MaterialModule } from '../material/material.module';
+import { DemoToolbarModule } from '../demo-toolbar/demo-toolbar.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import { MaterialModule } from '../material/material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule,
+    DemoToolbarModule,
     UserRoutingModule
   ]
 })

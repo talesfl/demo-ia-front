@@ -1,11 +1,8 @@
-<mat-toolbar color="primary">
-
-    <span>Demo IA Front - User</span>
+<app-demo-toolbar [title]="'User'">
 
     <!-- TODO: retirar o valor hardcoded -->
     <button mat-stroked-button [routerLink]="['details/joao']">Details</button>
     <button mat-stroked-button [routerLink]="['management']">Management</button>
-
-</mat-toolbar>
+</app-demo-toolbar>
 
 <router-outlet></router-outlet>
