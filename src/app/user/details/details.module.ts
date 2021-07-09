@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
-import { DetailsRoutingModule } from './details-routing.module';
+import { MaterialModule } from 'src/app/material/material.module';
+
 import { DetailsComponent } from './details.component';
-
+import { DetailsRoutingModule } from './details-routing.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +13,8 @@ import { DetailsComponent } from './details.component';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
     DetailsRoutingModule
   ]
 })

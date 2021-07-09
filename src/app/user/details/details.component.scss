@@ -1,0 +1,9 @@
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    mat-form-field {
+        flex-grow: 1;
+    }
+}

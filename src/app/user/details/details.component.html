@@ -1,7 +1,54 @@
-<div class="container">
-  
-    <div class="content">
-        hhfashfiasufhaisufhasiufhas
+<form [formGroup]="formGroup" class="form-flex-layout">
+
+    <div class="flex-row">
+        <mat-form-field appearance="outline">
+            <mat-label>Create Date</mat-label>
+            <input matInput formControlName="createDate">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Update Date</mat-label>
+            <input matInput formControlName="updateDate">
+        </mat-form-field>
     </div>
-  
-  </div>
+
+    <div class="flex-row">
+        <mat-form-field appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Login</mat-label>
+            <input matInput formControlName="login" required>
+        </mat-form-field>
+    </div>
+
+    <mat-slide-toggle color="primary" formControlName="admin">
+        Is Admin?
+    </mat-slide-toggle>
+
+    <div class="flex-row">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Repeat Password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary">Save</button>
+
+</form>
