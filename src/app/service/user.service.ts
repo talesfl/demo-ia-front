@@ -27,6 +27,10 @@ export class UserService {
         return this.http.get<void>(`${this.URL}/${id}`);
     }
 
+    public deleteById(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.URL}/${id}`);
+    }
+
     public findByNameStartingWith(name?: string, pageable?: Pageable): Observable<Page<User>> {
         const params: HttpParams = new HttpParams({
             fromObject: {
