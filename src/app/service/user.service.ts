@@ -23,8 +23,8 @@ export class UserService {
         return this.http.put<User>(this.URL, user);
     }
 
-    public findById(id: number): Observable<void> {
-        return this.http.get<void>(`${this.URL}/${id}`);
+    public findById(id: number): Observable<User> {
+        return this.http.get<User>(`${this.URL}/${id}`);
     }
 
     public deleteById(id: number): Observable<void> {
