@@ -6,6 +6,7 @@ import { ManagementRoutingModule } from './management-routing.module';
 import { ManagementComponent } from './management.component';
 import { UserResolver } from 'src/app/resolver/user.resolver';
 import { UserService } from 'src/app/service/user.service';
+import { MessageService } from 'src/app/service/message.service';
 
 
 
@@ -20,7 +21,8 @@ import { UserService } from 'src/app/service/user.service';
   ],
   providers: [
     UserService,
-    UserResolver
+    UserResolver,
+    MessageService
   ]
 })
 export class ManagementModule { }
