@@ -17,6 +17,10 @@ const routes: Routes = [
         path: 'management',
         loadChildren: () => import('./management/management.module').then(m => m.ManagementModule),
         canActivate: [ AuthorizationGuard ]
+      },
+      {
+        path: 'email',
+        loadChildren: () => import('./email/email.module').then(m => m.EmailModule)
       }
     ]
   }
