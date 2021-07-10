@@ -7,7 +7,7 @@ export class MessageService {
     constructor(private matSnackBack: MatSnackBar) { }
 
     public showMessage(msg: string): void {
-        this.matSnackBack.open(msg, 'Fechar', {
+        this.matSnackBack.open(msg, 'Close', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
             duration: 2000
