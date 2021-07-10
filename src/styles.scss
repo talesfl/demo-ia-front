@@ -36,3 +36,16 @@ mat-toolbar {
         flex-grow: .3;
     }
 }
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+button.btn-margin-left-8-px {
+    margin-left: 8px;
+}
