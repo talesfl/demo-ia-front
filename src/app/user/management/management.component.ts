@@ -70,7 +70,7 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private subscribeToPageChangesEvent(): Subscription {
     return this.paginator.page.pipe(
-      switchMap((event: PageEvent) => this.userService.findByNomeStartingWith('', {
+      switchMap((event: PageEvent) => this.userService.findByNameStartingWith('', {
         pageNumber: event.pageIndex,
         pageSize: event.pageSize
       }))
@@ -97,7 +97,7 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public resetList(): void {
-    this.userService.findByNomeStartingWith()
+    this.userService.findByNameStartingWith()
       .subscribe((page: Page<User>) => {
         this.updateDataSource(page);
         this.clearSelection();

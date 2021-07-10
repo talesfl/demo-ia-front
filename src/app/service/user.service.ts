@@ -27,7 +27,7 @@ export class UserService {
         return this.http.get<void>(`${this.URL}/${id}`);
     }
 
-    public findByNomeStartingWith(name?: string, pageable?: Pageable): Observable<Page<User>> {
+    public findByNameStartingWith(name?: string, pageable?: Pageable): Observable<Page<User>> {
         const params: HttpParams = new HttpParams({
             fromObject: {
                 name: name ? name : '',

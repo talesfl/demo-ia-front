@@ -22,7 +22,7 @@ export class UserResolver implements Resolve<Page<User>> {
     resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Page<User> | Observable<Page<User>> | Promise<Page<User>> {
-        return this.userService.findByNomeStartingWith();
+        return this.userService.findByNameStartingWith();
     }
 
 }
