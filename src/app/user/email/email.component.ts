@@ -19,6 +19,8 @@ import { MessageService } from 'src/app/service/message.service';
 
 import { Email } from 'src/app/domain/email';
 import { EmailService } from 'src/app/service/email.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEmailComponent } from './dialog-email/dialog-email.component';
 
 @Component({
   selector: 'app-email',
@@ -40,8 +42,8 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private emailService: EmailService,
-    private messageService: MessageService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -110,10 +112,18 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   public onClickView(): void {
+    const dialogRef = this.matDialog.open(DialogEmailComponent, {
+      width: '60%',
+      autoFocus: false
+    });
     // TODO: chamar um dialog com o views do email dentro.
   }
 
   public onClickCompose(): void {
+    const dialogRef = this.matDialog.open(DialogEmailComponent, {
+      width: '60%',
+      autoFocus: false
+    });
     // TODO: chamar um dialog com o views do email dentro.
   }
 

@@ -7,22 +7,28 @@ import { EmailComponent } from './email.component';
 import { EmailResolver } from 'src/app/resolver/email.resolver';
 import { EmailService } from 'src/app/service/email.service';
 import { MessageService } from 'src/app/service/message.service';
+import { DialogEmailComponent } from './dialog-email/dialog-email.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from 'src/app/service/user.service';
 
 
 
 @NgModule({
   declarations: [
-    EmailComponent
+    EmailComponent,
+    DialogEmailComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
+    ReactiveFormsModule,
     EmailRoutingModule
   ],
   providers: [
     EmailService,
     EmailResolver,
-    MessageService
+    MessageService,
+    UserService
   ]
 })
 export class EmailModule { }
