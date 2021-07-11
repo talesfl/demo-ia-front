@@ -1,0 +1,10 @@
+<div class="flex-row space-beetween">
+    <h2 mat-dialog-title>User edition</h2>
+
+    <button mat-icon-button mat-dialog-close aria-label="Close">
+        <mat-icon>close</mat-icon>
+    </button>
+
+</div>
+
+<app-details [user]="user" (userChange)="onUserChange($event)"></app-details>
