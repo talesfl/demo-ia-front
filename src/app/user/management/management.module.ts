@@ -7,16 +7,20 @@ import { ManagementComponent } from './management.component';
 import { UserResolver } from 'src/app/resolver/user.resolver';
 import { UserService } from 'src/app/service/user.service';
 import { MessageService } from 'src/app/service/message.service';
+import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
+import { DetailsModule } from '../details/details.module';
 
 
 
 @NgModule({
   declarations: [
-    ManagementComponent
+    ManagementComponent,
+    DialogEditComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
+    DetailsModule,
     ManagementRoutingModule
   ],
   providers: [

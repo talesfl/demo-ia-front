@@ -10,6 +10,7 @@ import { SelectionChange, SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -18,6 +19,7 @@ import { Page } from 'src/app/domain/page';
 import { User } from 'src/app/domain/user';
 import { UserService } from 'src/app/service/user.service';
 import { MessageService } from 'src/app/service/message.service';
+import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 
 @Component({
   selector: 'app-management',
@@ -40,7 +42,8 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private userService: UserService,
     private messageService: MessageService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -107,7 +110,11 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   
   public onClickEdit(): void {
-    // TODO: chamar um dialog com o details dentro.
+    const dialogRef = this.matDialog.open(DialogEditComponent, {
+      width: '60%',
+      autoFocus: false,
+      data: { user: this.selected }
+    });
   }
 
   public onClickRemove(): void {
