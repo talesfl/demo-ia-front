@@ -53,3 +53,23 @@ mat-toolbar {
 button.btn-margin-left-8-px {
     margin-left: 8px;
 }
+
+.width-10-pc {
+    width: 10%;
+}
+
+.width-30-pc {
+    width: 30%;
+}
+
+.width-40-pc {
+    width: 40%;
+}
+
+table {
+    width: 100%;
+
+    .table-row-selected{
+        background-color: #eeeeee;
+    }
+}
