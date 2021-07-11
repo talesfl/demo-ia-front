@@ -73,3 +73,9 @@ table {
         background-color: #eeeeee;
     }
 }
+
+.form-flex-column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
