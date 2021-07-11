@@ -13,6 +13,9 @@ import { MessageService } from 'src/app/service/message.service';
   declarations: [
     DetailsComponent
   ],
+  exports: [
+    DetailsComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,

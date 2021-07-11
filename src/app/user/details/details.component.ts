@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -12,7 +12,13 @@ import { Observable } from 'rxjs';
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
+
+  @Input() 
+  public user: User;
+
+  @Output()
+  public userChange: EventEmitter<User> = new EventEmitter<User>();
 
   public hide: boolean = true;
   public formGroup: FormGroup;
@@ -23,6 +29,12 @@ export class DetailsComponent {
     private messageService: MessageService,
   ) {
     this.formGroup = this.buildFormGroup();
+  }
+
+  ngOnInit(): void {
+    if (this.user?.id) {
+      this.formGroup.patchValue(this.user);
+    }
   }
 
   private buildFormGroup(): FormGroup {
@@ -39,7 +51,11 @@ export class DetailsComponent {
   }
 
   public resetFormGroup(): void {
-    this.formGroup.reset({ admin: false });
+    if (this.user?.id) {
+      this.formGroup.patchValue(this.user);
+    } else {
+      this.formGroup.reset({ admin: false });
+    }
   }
 
   public onClickSave(): void {
@@ -50,8 +66,10 @@ export class DetailsComponent {
     userObservable.subscribe((user: User) => {
       this.formGroup.patchValue(user);
       this.messageService.showMessage('User saved.');
+      this.userChange.emit(user);
     }, () => {
       this.messageService.showMessage('Something went wrong. User wasn\'t saved.');
+      this.userChange.emit();
     });
   }
 }
