@@ -40,7 +40,19 @@ export class UserService {
             }
         });
 
-        return this.http.get<Page<User>>(this.URL, { params });
+        return this.http.get<Page<User>>(`${this.URL}/name`, { params });
+    }
+
+    public findByEmailStartingWith(email?: string, pageable?: Pageable): Observable<Page<User>> {
+        const params: HttpParams = new HttpParams({
+            fromObject: {
+                email: email ? email : '',
+                pageNumber: String(pageable ? pageable.pageNumber : DEFAULT_PAGE_NUMBER),
+                pageSize: String(pageable ? pageable.pageSize : DEFAULT_PAGE_SIZE),
+            }
+        });
+
+        return this.http.get<Page<User>>(`${this.URL}/email`, { params });
     }
 
 }
