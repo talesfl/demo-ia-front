@@ -3,16 +3,22 @@
         class="btn-margin-left-8-px"
         mat-raised-button 
         [disabled]="selection.isEmpty()" 
-        (click)="onClickEdit()">
-        Edit
+        (click)="onClickView()">
+        View
     </button>
     <button
         class="btn-margin-left-8-px" 
         mat-raised-button 
-        [disabled]="selection.isEmpty()" 
-        color="warn" 
-        (click)="onClickRemove()">
-        Remove
+        color="primary" 
+        (click)="onClickCompose()">
+        Compose
+    </button>
+    <button
+        class="btn-margin-left-8-px" 
+        mat-raised-button 
+        color="primary" 
+        (click)="onClickRefresh()">
+        Refresh
     </button>
 </div>
 <table mat-table [dataSource]="dataSource">

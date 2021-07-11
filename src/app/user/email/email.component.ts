@@ -15,9 +15,10 @@ import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Page } from 'src/app/domain/page';
-import { User } from 'src/app/domain/user';
-import { UserService } from 'src/app/service/user.service';
 import { MessageService } from 'src/app/service/message.service';
+
+import { Email } from 'src/app/domain/email';
+import { EmailService } from 'src/app/service/email.service';
 
 @Component({
   selector: 'app-email',
@@ -26,19 +27,19 @@ import { MessageService } from 'src/app/service/message.service';
 })
 export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  selected: User;
+  selected: Email;
   displayedColumns: string[] = ['id', 'name', 'login', 'email', 'admin'];
 
-  dataSource = new MatTableDataSource<User>([]);
+  dataSource = new MatTableDataSource<Email>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  selection = new SelectionModel<User>(false, null, true);
+  selection = new SelectionModel<Email>(false, null, true);
   private selectionChangeSubscription: Subscription;
   private pageChangeSubscription: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private userService: UserService,
+    private emailService: EmailService,
     private messageService: MessageService,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
@@ -59,7 +60,7 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private _subscribeToselectionChange(): Subscription {
-    return this.selection.changed.subscribe((change: SelectionChange<User>) => {
+    return this.selection.changed.subscribe((change: SelectionChange<Email>) => {
       if (change.removed.includes(this.selected)) {
         this.selected = null;
       }
@@ -72,21 +73,22 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private subscribeToPageChangesEvent(): Subscription {
     return this.paginator.page.pipe(
-      switchMap((event: PageEvent) => this.userService.findByNameStartingWith('', {
+      // TODO: pegar o id do usuário logado na sessão
+      switchMap((event: PageEvent) => this.emailService.findByUserFromId(0, {
         pageNumber: event.pageIndex,
         pageSize: event.pageSize
       }))
-    ).subscribe((page: Page<User>) => this.updateDataSource(page));
+    ).subscribe((page: Page<Email>) => this.updateDataSource(page));
   }
 
   private initDataFromResolver(): void {
     if (this.activatedRoute.snapshot?.data?.page) {
-      const page: Page<User> = this.activatedRoute.snapshot.data.page;
+      const page: Page<Email> = this.activatedRoute.snapshot.data.page;
       this.updateDataSource(page);
     }
   }
 
-  private updateDataSource(page: Page<User>): void {
+  private updateDataSource(page: Page<Email>): void {
     this.dataSource.data = page.content;
     this.paginator.pageIndex = page.number;
     this.paginator.length = page.totalElements;
@@ -98,29 +100,21 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selection.clear();
   }
 
-  public resetList(): void {
-    this.userService.findByNameStartingWith()
-      .subscribe((page: Page<User>) => {
+  public onClickRefresh(): void {
+    // TODO: pegar o id do usuário logado na sessão
+    this.emailService.findByUserFromId(0)
+      .subscribe((page: Page<Email>) => {
         this.updateDataSource(page);
         this.clearSelection();
       });
   }
   
-  public onClickEdit(): void {
-    // TODO: chamar um dialog com o details dentro.
+  public onClickView(): void {
+    // TODO: chamar um dialog com o views do email dentro.
   }
 
-  public onClickRemove(): void {
-    // TODO: colocar um dialog de confirmação
-    this.userService.deleteById(this.selected.id)
-      .subscribe(
-        () => { 
-          this.dataSource.data = this.dataSource.data.filter((user: User) => user.id != this.selected.id);
-          this.clearSelection()
-          this.messageService.showMessage('User removed.'); 
-        },
-        () => this.messageService.showMessage('Something went wrong. User wasn\'t removed.')
-      );
+  public onClickCompose(): void {
+    // TODO: chamar um dialog com o views do email dentro.
   }
 
 }
