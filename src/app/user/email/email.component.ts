@@ -28,7 +28,7 @@ import { EmailService } from 'src/app/service/email.service';
 export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   selected: Email;
-  displayedColumns: string[] = ['id', 'name', 'login', 'email', 'admin'];
+  displayedColumns: string[] = ['to', 'subject', 'create-date'];
 
   dataSource = new MatTableDataSource<Email>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
