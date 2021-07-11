@@ -9,13 +9,15 @@ import { UserService } from 'src/app/service/user.service';
 import { MessageService } from 'src/app/service/message.service';
 import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 import { DetailsModule } from '../details/details.module';
+import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
 
 
 
 @NgModule({
   declarations: [
     ManagementComponent,
-    DialogEditComponent
+    DialogEditComponent,
+    DialogConfirmComponent
   ],
   imports: [
     CommonModule,

@@ -12,7 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Page } from 'src/app/domain/page';
@@ -20,6 +20,7 @@ import { User } from 'src/app/domain/user';
 import { UserService } from 'src/app/service/user.service';
 import { MessageService } from 'src/app/service/message.service';
 import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
+import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
 
 @Component({
   selector: 'app-management',
@@ -118,14 +119,24 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public onClickRemove(): void {
-    // TODO: colocar um dialog de confirmação
+
+    const dialogRef = this.matDialog.open(DialogConfirmComponent, {
+      autoFocus: false,
+      data: { user: this.selected }
+    });
+
+    dialogRef.afterClosed().subscribe((remove: boolean) => {
+      if (remove) { this.removeUser() }
+    });
+  }
+
+  private removeUser(): void {
     this.userService.deleteById(this.selected.id)
-      .subscribe(
-        () => { 
-          this.dataSource.data = this.dataSource.data.filter((user: User) => user.id != this.selected.id);
-          this.clearSelection()
-          this.messageService.showMessage('User removed.'); 
-        },
+      .subscribe(() => {
+        this.dataSource.data = this.dataSource.data.filter((user: User) => user.id != this.selected.id);
+        this.clearSelection()
+        this.messageService.showMessage('User removed.');
+      },
         () => this.messageService.showMessage('Something went wrong. User wasn\'t removed.')
       );
   }
