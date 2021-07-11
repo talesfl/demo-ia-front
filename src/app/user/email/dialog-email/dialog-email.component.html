@@ -1,4 +1,11 @@
-<h2 mat-dialog-title>{{isNewEmail() ? 'New e-mail' : 'E-mail view'}}</h2>
+<div class="flex-row space-beetween">
+  <h2 mat-dialog-title>{{isNewEmail() ? 'New e-mail' : 'E-mail view'}}</h2>
+
+  <button mat-icon-button mat-dialog-close aria-label="Close">
+      <mat-icon>close</mat-icon>
+  </button>
+
+</div>
 
 <mat-dialog-content>
   <form [formGroup]="formGroup" class="form-flex-column"> 
@@ -29,10 +36,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Fechar</button>
+  <button mat-button mat-dialog-close>Close</button>
 
   <ng-container *ngIf="isNewEmail()">
-    <button mat-button (click)="dispatchEmail()" [disabled]="this.formGroup.invalid">Salvar</button>
+    <button mat-button (click)="dispatchEmail()" [disabled]="this.formGroup.invalid">Send</button>
   </ng-container>
 
 </mat-dialog-actions>
