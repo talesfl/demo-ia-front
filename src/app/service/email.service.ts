@@ -26,7 +26,7 @@ export class EmailService {
     public findByUserFromId(userId: number, pageable?: Pageable): Observable<Page<Email>> {
         const params: HttpParams = new HttpParams({
             fromObject: {
-                userId,
+                id: userId,
                 pageNumber: String(pageable ? pageable.pageNumber : DEFAULT_PAGE_NUMBER),
                 pageSize: String(pageable ? pageable.pageSize : DEFAULT_PAGE_SIZE),
             }
