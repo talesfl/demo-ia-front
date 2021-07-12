@@ -36,10 +36,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-stroked-button mat-dialog-close>Close</button>
 
   <ng-container *ngIf="isNewEmail()">
-    <button mat-button (click)="dispatchEmail()" [disabled]="this.formGroup.invalid">Send</button>
+    <button mat-stroked-button (click)="dispatchEmail()" [disabled]="this.formGroup.invalid">Send</button>
   </ng-container>
 
 </mat-dialog-actions>

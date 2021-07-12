@@ -21,6 +21,7 @@ import { Email } from 'src/app/domain/email';
 import { EmailService } from 'src/app/service/email.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEmailComponent } from './dialog-email/dialog-email.component';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-email',
@@ -43,7 +44,8 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private emailService: EmailService,
     private changeDetectorRef: ChangeDetectorRef,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -74,9 +76,9 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private subscribeToPageChangesEvent(): Subscription {
+    const userId = this.authenticationService.loggedUser.id;
     return this.paginator.page.pipe(
-      // TODO: pegar o id do usuário logado na sessão
-      switchMap((event: PageEvent) => this.emailService.findByUserFromId(0, {
+      switchMap((event: PageEvent) => this.emailService.findByUserFromId(userId, {
         pageNumber: event.pageIndex,
         pageSize: event.pageSize
       }))
@@ -103,8 +105,8 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public onClickRefresh(): void {
-    // TODO: pegar o id do usuário logado na sessão
-    this.emailService.findByUserFromId(0)
+    const userId = this.authenticationService.loggedUser.id;
+    this.emailService.findByUserFromId(userId)
       .subscribe((page: Page<Email>) => {
         this.updateDataSource(page);
         this.clearSelection();
@@ -114,9 +116,13 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   public onClickView(): void {
     const dialogRef = this.matDialog.open(DialogEmailComponent, {
       width: '60%',
-      autoFocus: false
+      autoFocus: false,
+      data: { email: this.selected }
     });
-    // TODO: chamar um dialog com o views do email dentro.
+
+    dialogRef.beforeClosed().subscribe((refresh: boolean) => { 
+      if (refresh) { this.onClickRefresh(); }
+    });
   }
 
   public onClickCompose(): void {
@@ -124,7 +130,6 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
       width: '60%',
       autoFocus: false
     });
-    // TODO: chamar um dialog com o views do email dentro.
   }
 
 }
