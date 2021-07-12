@@ -6,29 +6,31 @@ import { User } from '../domain/user';
 import { Page } from '../domain/page';
 import { Pageable } from '../domain/pageable';
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from '../domain/constants';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable()
 export class UserService {
 
-    private readonly URL: string = '/api/users';
+    private readonly _URL: string = `${environment.server.contextPath}/users`;
+    
 
     constructor(private http: HttpClient) { }
 
     public save(user: User): Observable<User> {
-        return this.http.post<User>(this.URL, user);
+        return this.http.post<User>(this._URL, user);
     }
 
     public update(user: User): Observable<User> {
-        return this.http.put<User>(this.URL, user);
+        return this.http.put<User>(this._URL, user);
     }
 
     public findById(id: number): Observable<User> {
-        return this.http.get<User>(`${this.URL}/${id}`);
+        return this.http.get<User>(`${this._URL}/${id}`);
     }
 
     public deleteById(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.URL}/${id}`);
+        return this.http.delete<void>(`${this._URL}/${id}`);
     }
 
     public findByNameStartingWith(name?: string, pageable?: Pageable): Observable<Page<User>> {
@@ -40,7 +42,7 @@ export class UserService {
             }
         });
 
-        return this.http.get<Page<User>>(`${this.URL}/name`, { params });
+        return this.http.get<Page<User>>(`${this._URL}/name`, { params });
     }
 
     public findByEmailStartingWith(email?: string, pageable?: Pageable): Observable<Page<User>> {
@@ -52,7 +54,7 @@ export class UserService {
             }
         });
 
-        return this.http.get<Page<User>>(`${this.URL}/email`, { params });
+        return this.http.get<Page<User>>(`${this._URL}/email`, { params });
     }
 
 }

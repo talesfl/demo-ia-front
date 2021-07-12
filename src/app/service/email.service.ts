@@ -6,21 +6,23 @@ import { Email } from '../domain/email';
 import { Page } from '../domain/page';
 import { Pageable } from '../domain/pageable';
 import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from '../domain/constants';
+import { environment } from 'src/environments/environment';
+import { AuthenticationService } from './authentication.service';
 
 
 @Injectable()
 export class EmailService {
 
-    private readonly URL: string = '/api/emails';
+    private readonly _URL: string = `${environment.server.contextPath}/emails`;
 
     constructor(private http: HttpClient) { }
 
     public dispatchEmail(email: Email): Observable<Email> {
-        return this.http.post<Email>(this.URL, email);
+        return this.http.post<Email>(this._URL, email);
     }
 
     public findById(id: number): Observable<Email> {
-        return this.http.get<Email>(`${this.URL}/${id}`);
+        return this.http.get<Email>(`${this._URL}/${id}`);
     }
 
     public findByUserFromId(userId: number, pageable?: Pageable): Observable<Page<Email>> {
@@ -32,7 +34,7 @@ export class EmailService {
             }
         });
 
-        return this.http.get<Page<Email>>(this.URL, { params });
+        return this.http.get<Page<Email>>(this._URL, { params });
     }
 
 }
