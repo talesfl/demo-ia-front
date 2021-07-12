@@ -9,19 +9,19 @@
 
             <mat-form-field appearance="fill">
                 <mat-label>E-mail</mat-label>
-                <input matInput formControlName="email" required>
+                <input matInput name="email" formControlName="email" required>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+                <input matInput name="password" formControlName="password" [type]="hide ? 'password' : 'text'" required>
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
             </mat-form-field>
 
-            <button mat-raised-button color="primary">Login</button>
+            <button mat-raised-button color="primary" (click)="onClickLogin()">Login</button>
 
         </form>
         
