@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 
 import { User } from "../domain/user";
@@ -14,7 +14,7 @@ export class AuthenticationService {
     public isAuthenticated: boolean = true;
 
     // TODO: mockado enquanto descubro a sessão
-    public loggedUser$ = of(new User({
+    public loggedUser = new User({
         id: 1,
         name: 'Admin da Silva',
         login: 'admin',
@@ -22,7 +22,7 @@ export class AuthenticationService {
         email: 'admin@admin.com.br',
         createDate: '12/07/2021 00:00:00',
         updateDate: '12/07/2021 00:00:00'
-    }))
+    });
 
     constructor(private http: HttpClient) { }
 
