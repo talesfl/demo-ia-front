@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from '../service/authentication.service';
 
 @Injectable()
-export class HttpRequestInterceptor implements HttpInterceptor {
+export class AuthenticationInterceptor implements HttpInterceptor {
 
   constructor(private authenticationService: AuthenticationService) { }
 
@@ -18,8 +18,8 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     if (this.authenticationService.isAuthenticated) {
       request = request.clone({
         setHeaders: {
-          'Authorization': `Basic ${btoa('admin@admin.com.br:123')}`,
-          'WWW-Authenticate': 'Basic realm="demo_ia_back"'
+          'Authorization': `Basic ${this.authenticationService.getToken()}`,
+          'WWW-Authenticate': `Basic realm=${this.authenticationService.getRealm()}`
         }
       });
     }

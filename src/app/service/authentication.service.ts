@@ -35,4 +35,12 @@ export class AuthenticationService {
     public logout(): Observable<void> {
         return this.http.get<void>(`${this._URL}/logout`);
     }
+
+    public getToken(): string {
+        return btoa('admin@admin.com.br:123');
+    }
+
+    public getRealm(): string {
+        return '"demo_ia_back"';
+    }
 }

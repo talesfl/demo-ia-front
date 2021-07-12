@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './service/authentication.service';
 import { AuthenticationGuard } from './guard/authentication.guard';
 
-import { HttpRequestInterceptor } from './interceptor/http-request.interceptor';
+import { AuthenticationInterceptor } from './interceptor/authentication.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { HttpRequestInterceptor } from './interceptor/http-request.interceptor';
   providers: [
     AuthenticationService,
     AuthenticationGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
