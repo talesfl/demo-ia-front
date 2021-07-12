@@ -4,8 +4,7 @@ import { User } from 'src/app/domain/user';
 
 @Component({
   selector: 'app-dialog-edit',
-  templateUrl: './dialog-edit.component.html',
-  styleUrls: ['./dialog-edit.component.scss']
+  templateUrl: './dialog-edit.component.html'
 })
 export class DialogEditComponent {
 
