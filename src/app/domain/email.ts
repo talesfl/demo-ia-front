@@ -9,7 +9,7 @@ export class Email {
     content: String;
     createDate: String;
 
-    constructor(obj: Partial<Email>) {
+    constructor(obj?: Partial<Email>) {
         Object.assign(this, obj);
     }
 }
