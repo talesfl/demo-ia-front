@@ -6,7 +6,6 @@ import { ManagementRoutingModule } from './management-routing.module';
 import { ManagementComponent } from './management.component';
 import { UserResolver } from 'src/app/resolver/user.resolver';
 import { UserService } from 'src/app/service/user.service';
-import { MessageService } from 'src/app/service/message.service';
 import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 import { DetailsModule } from '../details/details.module';
 import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
@@ -27,8 +26,7 @@ import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.componen
   ],
   providers: [
     UserService,
-    UserResolver,
-    MessageService
+    UserResolver
   ]
 })
 export class ManagementModule { }

@@ -7,7 +7,6 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { DetailsComponent } from './details.component';
 import { DetailsRoutingModule } from './details-routing.module';
 import { UserService } from 'src/app/service/user.service';
-import { MessageService } from 'src/app/service/message.service';
 
 @NgModule({
   declarations: [
@@ -23,8 +22,7 @@ import { MessageService } from 'src/app/service/message.service';
     DetailsRoutingModule
   ],
   providers: [
-    UserService,
-    MessageService
+    UserService
   ]
 })
 export class DetailsModule { }
