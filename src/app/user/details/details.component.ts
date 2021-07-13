@@ -62,7 +62,6 @@ export class DetailsComponent implements OnInit {
       id: [null],
       name: [{ value: null, disabled: false }, Validators.required],
       login: [{ value: null, disabled: false }, Validators.required],
-      password: [{ value: null, disabled: false }, Validators.required],
       createDate: [{ value: null, disabled: true }, Validators.required],
       updateDate: [{ value: null, disabled: true }, Validators.required],
       email: [{ value: null, disabled: false }, Validators.compose([Validators.required, Validators.email])],

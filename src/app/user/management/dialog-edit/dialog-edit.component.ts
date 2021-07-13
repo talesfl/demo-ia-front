@@ -19,7 +19,7 @@ export class DialogEditComponent {
 
   public onUserChange(user: User): void {
     if (user?.id) {
-      this.dialogRef.close();
+      this.user = user;
     }
   }
 

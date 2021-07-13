@@ -9,6 +9,7 @@ import { UserService } from 'src/app/service/user.service';
 import { DialogEditComponent } from './dialog-edit/dialog-edit.component';
 import { DetailsModule } from '../details/details.module';
 import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
+import { PasswordModule } from '../password/password.module';
 
 
 
@@ -22,6 +23,7 @@ import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.componen
     CommonModule,
     MaterialModule,
     DetailsModule,
+    PasswordModule,
     ManagementRoutingModule
   ],
   providers: [

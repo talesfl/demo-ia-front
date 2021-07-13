@@ -1,14 +1,13 @@
 <div class="flex-row justify-content-end">
     <button 
         class="btn-margin-left-8-px"
-        mat-raised-button 
-        [disabled]="selection.isEmpty()" 
+        mat-stroked-button 
         (click)="onClickEdit()">
-        Edit
+        {{selection.isEmpty ? 'New ' : 'Edit '}} user
     </button>
     <button
         class="btn-margin-left-8-px" 
-        mat-raised-button 
+        mat-stroked-button 
         [disabled]="selection.isEmpty()" 
         color="warn" 
         (click)="onClickRemove()">
