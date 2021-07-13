@@ -52,7 +52,6 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
     this.initDataFromResolver();
     this.pageChangeSubscription = this.subscribeToPageChangesEvent();
   }
