@@ -130,6 +130,10 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
       width: '60%',
       autoFocus: false
     });
+
+    dialogRef.beforeClosed().subscribe((refresh: boolean) => { 
+      if (refresh) { this.onClickRefresh(); }
+    });
   }
 
 }

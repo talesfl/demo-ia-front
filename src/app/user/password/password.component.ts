@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/domain/user';
 import { MessageService } from 'src/app/service/message.service';
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/service/user.service';
   templateUrl: './password.component.html',
   styleUrls: ['./password.component.scss']
 })
-export class PasswordComponent {
+export class PasswordComponent implements OnChanges {
 
   @Input()
   public user: User;
@@ -28,6 +28,15 @@ export class PasswordComponent {
     this.formGroup = this.buildFormGroup();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.setUserId(changes);
+  }
+  
+  private setUserId(changes: SimpleChanges) {
+    if (changes.user?.currentValue?.id) {
+      this.formGroup.get('id').setValue(changes.user.currentValue.id);
+    }
+  }
 
   private buildFormGroup(): FormGroup {
     return this.formBuilder.group({
@@ -37,6 +46,15 @@ export class PasswordComponent {
   }
 
   public onClickSave(): void {
+    if (this.user?.id) {
+      this.save();
+    } else {
+      this.messageService.showMessage('Save a new user first.');
+    }
+  }
+
+
+  private save() {
     const user: User = new User(this.formGroup.getRawValue());
     this.userService.updatePassword(user)
       .subscribe(
@@ -50,5 +68,4 @@ export class PasswordComponent {
           this.userChange.emit();
         });
   }
-
 }

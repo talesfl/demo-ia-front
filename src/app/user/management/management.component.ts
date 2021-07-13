@@ -114,8 +114,10 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
     const dialogRef = this.matDialog.open(DialogEditComponent, {
       width: '60%',
       autoFocus: false,
-      data: { user: this.selected }
+      data: { user: this.selection.isEmpty() ? new User() : this.selected }
     });
+
+    dialogRef.afterClosed().subscribe(() => this.resetList());
   }
 
   public onClickRemove(): void {
