@@ -1,18 +1,18 @@
 <div class="app-container">
-    
-    <app-demo-toolbar [title]="'User: ' + userEmail">
-    
-        <button mat-stroked-button routerLink="email" >Email</button>
 
-        <!-- TODO: retirar o valor hardcoded -->
-        <button mat-stroked-button routerLink="details/admin">Details</button>
-        <button mat-stroked-button routerLink="management">Management</button>
-        
+    <app-demo-toolbar [title]="'User: ' + user.email">
+
+        <button mat-stroked-button routerLink="email">Email</button>
+        <button mat-stroked-button routerLink="details">Details</button>
+        <button mat-stroked-button routerLink="management/admin" [disabled]="!(user?.admin)">
+            Management
+        </button>
+
         <div class="preenchimento-1"></div>
-        
+
         <button mat-stroked-button routerLink="../login">Log out</button>
     </app-demo-toolbar>
-    
+
     <div class="app-content">
         <router-outlet></router-outlet>
     </div>

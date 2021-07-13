@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../domain/user';
 import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
@@ -8,12 +9,12 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class UserComponent {
 
-  public userEmail: string = '';
+  public user: User;
 
   constructor(
     private authenticationService: AuthenticationService
   ) {
-    this.userEmail = this.authenticationService.loggedUser.email;
+    this.user = this.authenticationService.loggedUser;
   }
 
 
