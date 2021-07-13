@@ -38,7 +38,7 @@ export class PasswordComponent {
 
   public onClickSave(): void {
     const user: User = new User(this.formGroup.getRawValue());
-    this.userService.update(user)
+    this.userService.updatePassword(user)
       .subscribe(
         (user: User) => {
           this.formGroup.patchValue(user);
