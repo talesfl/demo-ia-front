@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/domain/user';
 import { MessageService } from 'src/app/service/message.service';
 import { UserService } from 'src/app/service/user.service';
+import { PasswordValidator } from 'src/app/validator/password-validator';
 
 @Component({
   selector: 'app-password',
@@ -42,7 +43,10 @@ export class PasswordComponent implements OnChanges {
     return this.formBuilder.group({
       id: [null],
       password: [null, Validators.required],
-    });
+      confirmPassword: [null, Validators.required],
+    },
+      { validators: Validators.compose([PasswordValidator.matchValidator, Validators.required]) }
+    );
   }
 
   public onClickSave(): void {
