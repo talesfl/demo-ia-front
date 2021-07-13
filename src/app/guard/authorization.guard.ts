@@ -26,7 +26,7 @@ export class AuthorizationGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     let canActivate = true;
-    if (!this.authenticationService.loggedUser?.admin) {
+    if (!this.authenticationService.loggedUser()?.admin) {
 
       this.messageService.showMessage('Only for administrators.');
 

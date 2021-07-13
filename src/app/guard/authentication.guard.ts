@@ -26,7 +26,7 @@ export class AuthenticationGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     let canActivate = true;
-    if (!this.authenticationService.isAuthenticated) {
+    if (!this.authenticationService.isAuthenticated()) {
       
       this.messageService.showMessage('Please, log in.');
 

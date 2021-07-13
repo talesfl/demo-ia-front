@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   'server': {
-    'contextPath': '/api'
+    'contextPath': '/api',
+    'realm': '"demo_ia_back"'
   }
 };
 

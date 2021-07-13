@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../domain/user';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
+import { MessageService } from '../service/message.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,9 @@ export class LoginComponent {
   public formGroup: FormGroup;
 
   constructor(
+    private router: Router,
     private formBuilder: FormBuilder,
+    private messageService: MessageService,
     private authenticationService: AuthenticationService
   ) {
     this.formGroup = this.buildFormGroup();
@@ -31,7 +34,13 @@ export class LoginComponent {
     this.authenticationService.login(
       this.formGroup.get('email').value,
       this.formGroup.get('password').value
-    ).subscribe((user: User) => alert(user));
+    ).subscribe(
+      () => {
+        this.messageService.showMessage('Logged in.');
+        this.router.navigateByUrl('user');
+      },
+      (error) => this.messageService.showMessage(`Cannot log in. Reason: ${error.statusText}`)
+    );
   }
 
 }

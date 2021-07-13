@@ -49,9 +49,12 @@ export class DetailsComponent implements OnInit {
   }
 
   private findLoggedUser() {
-    const userId = this.authenticationService.loggedUser.id;
+    const userId = this.authenticationService.loggedUser()?.id;
     this.userService.findById(userId)
-      .subscribe((user: User) => this.formGroup.patchValue(user));
+      .subscribe((user: User) => {
+        this.formGroup.patchValue(user);
+        if (!user.admin) { this.formGroup.get('admin').disable(); }
+      });
   }
 
   private buildFormGroup(): FormGroup {

@@ -76,7 +76,7 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private subscribeToPageChangesEvent(): Subscription {
-    const userId = this.authenticationService.loggedUser.id;
+    const userId = this.authenticationService.loggedUser()?.id;
     return this.paginator.page.pipe(
       switchMap((event: PageEvent) => this.emailService.findByUserFromId(userId, {
         pageNumber: event.pageIndex,
@@ -105,7 +105,7 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public onClickRefresh(): void {
-    const userId = this.authenticationService.loggedUser.id;
+    const userId = this.authenticationService.loggedUser()?.id;
     this.emailService.findByUserFromId(userId)
       .subscribe((page: Page<Email>) => {
         this.updateDataSource(page);

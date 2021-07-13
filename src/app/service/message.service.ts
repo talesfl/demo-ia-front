@@ -10,7 +10,7 @@ export class MessageService {
         this.matSnackBack.open(msg, 'Close', {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            duration: 2000
+            duration: 3000
         });
     }
 }

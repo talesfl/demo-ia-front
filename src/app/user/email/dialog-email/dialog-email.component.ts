@@ -47,7 +47,7 @@ export class DialogEmailComponent implements OnInit {
   private buildFormGroup() {
     this.formGroup = this.formBuilder.group({
       id: [null],
-      userFrom: [{ value: this.authenticationService.loggedUser, disabled: true }],
+      userFrom: [{ value: this.authenticationService.loggedUser(), disabled: true }],
       userTo: [{ value: null, disable: false }, Validators.required],
       subject: [{ value: null, disabled: false }, Validators.required],
       content: [{ value: null, disabled: false }]
