@@ -3,7 +3,7 @@
         class="btn-margin-left-8-px"
         mat-stroked-button 
         (click)="onClickEdit()">
-        {{selection.isEmpty ? 'New ' : 'Edit '}} user
+        {{selection.isEmpty() ? 'New ' : 'Edit '}} user
     </button>
     <button
         class="btn-margin-left-8-px" 

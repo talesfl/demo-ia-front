@@ -9,8 +9,8 @@ export class MessageService {
     public showMessage(msg: string): void {
         this.matSnackBack.open(msg, 'Close', {
             horizontalPosition: 'right',
-            verticalPosition: 'top',
-            duration: 3000
+            verticalPosition: 'bottom',
+            duration: 2300
         });
     }
 }
