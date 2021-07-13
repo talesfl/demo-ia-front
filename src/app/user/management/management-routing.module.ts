@@ -5,7 +5,7 @@ import { ManagementComponent } from './management.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'admin',
     component: ManagementComponent,
     resolve: { page: UserResolver }
   }
