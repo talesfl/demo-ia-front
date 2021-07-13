@@ -13,7 +13,6 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
     private readonly _URL: string = `${environment.server.contextPath}/users`;
-    
 
     constructor(private http: HttpClient) { }
 
@@ -57,4 +56,7 @@ export class UserService {
         return this.http.get<Page<User>>(`${this._URL}/email`, { params });
     }
 
+    public updatePassword(user: User): Observable<User> {
+        return this.http.put<User>(`${this._URL}/password`, user);
+    }
 }
