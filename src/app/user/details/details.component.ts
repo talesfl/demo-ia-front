@@ -6,6 +6,8 @@ import { User } from 'src/app/domain/user';
 import { UserService } from 'src/app/service/user.service';
 import { MessageService } from 'src/app/service/message.service';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from 'src/app/service/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -27,14 +29,29 @@ export class DetailsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private messageService: MessageService,
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {
     this.formGroup = this.buildFormGroup();
   }
 
   ngOnInit(): void {
-    if (this.user?.id) {
+    this.onInitForm();
+  }
+
+  private onInitForm() {
+    if (this.router?.url?.includes('details')) {
+      this.findLoggedUser();
+
+    } else if (this.user?.id) {
       this.formGroup.patchValue(this.user);
     }
+  }
+
+  private findLoggedUser() {
+    const userId = this.authenticationService.loggedUser.id;
+    this.userService.findById(userId)
+      .subscribe((user: User) => this.formGroup.patchValue(user));
   }
 
   private buildFormGroup(): FormGroup {
