@@ -1,41 +1,43 @@
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
-  CanActivateChild,
-  CanDeactivate,
-  CanLoad,
-  Route,
-  UrlSegment,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  UrlTree
+  UrlTree,
+  Router
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from '../service/authentication.service';
+import { MessageService } from '../service/message.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizationGuard implements CanActivate, CanActivateChild, CanDeactivate<unknown>, CanLoad {
+export class AuthorizationGuard implements CanActivate {
+
+  constructor(
+    private router: Router,
+    private messageService: MessageService,
+    private authenticationService: AuthenticationService
+  ) { }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+
+    let canActivate = true;
+    if (!this.authenticationService.loggedUser?.admin) {
+
+      this.messageService.showMessage('Only for administrators.');
+
+      this.router.navigate(['user'], {
+        queryParams: { fromUrl: state.url }
+      });
+
+      canActivate = false;
+    }
+
+    return canActivate;
   }
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  canDeactivate(
-    component: unknown,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
-  }
+
 }

@@ -11,6 +11,9 @@ import { AuthenticationService } from './service/authentication.service';
 import { AuthenticationGuard } from './guard/authentication.guard';
 
 import { AuthenticationInterceptor } from './interceptor/authentication.interceptor';
+import { MessageService } from './service/message.service';
+import { AuthorizationGuard } from './guard/authorization.guard';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -20,11 +23,14 @@ import { AuthenticationInterceptor } from './interceptor/authentication.intercep
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MaterialModule,
     AppRoutingModule
   ],
   providers: [
+    MessageService,
     AuthenticationService,
     AuthenticationGuard,
+    AuthorizationGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
