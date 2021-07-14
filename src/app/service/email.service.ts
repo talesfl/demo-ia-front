@@ -25,7 +25,7 @@ export class EmailService {
         return this.http.get<Email>(`${this._URL}/${id}`);
     }
 
-    public findByUserFromId(userId: number, pageable?: Pageable): Observable<Page<Email>> {
+    public findByUserId(userId: number, pageable?: Pageable): Observable<Page<Email>> {
         const params: HttpParams = new HttpParams({
             fromObject: {
                 id: userId,

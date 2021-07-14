@@ -26,7 +26,7 @@ export class EmailResolver implements Resolve<Page<Email>> {
         state: RouterStateSnapshot): Page<Email> | Observable<Page<Email>> | Promise<Page<Email>> {
         
         const userId = this.authenticationService.loggedUser()?.id;
-        return this.emailService.findByUserFromId(userId);
+        return this.emailService.findByUserId(userId);
     }
 
 }

@@ -31,7 +31,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   selected: Email;
-  displayedColumns: string[] = ['to', 'subject', 'create-date'];
+  displayedColumns: string[] = ['from', 'to', 'subject', 'create-date'];
 
   dataSource = new MatTableDataSource<Email>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -77,7 +77,7 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscribeToPageChangesEvent(): Subscription {
     const userId = this.authenticationService.loggedUser()?.id;
     return this.paginator.page.pipe(
-      switchMap((event: PageEvent) => this.emailService.findByUserFromId(userId, {
+      switchMap((event: PageEvent) => this.emailService.findByUserId(userId, {
         pageNumber: event.pageIndex,
         pageSize: event.pageSize
       }))
@@ -105,7 +105,7 @@ export class EmailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public onClickRefresh(): void {
     const userId = this.authenticationService.loggedUser()?.id;
-    this.emailService.findByUserFromId(userId)
+    this.emailService.findByUserId(userId)
       .subscribe((page: Page<Email>) => {
         this.updateDataSource(page);
         this.clearSelection();
