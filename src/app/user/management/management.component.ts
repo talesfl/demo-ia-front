@@ -101,7 +101,7 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
     this.selection.clear();
   }
 
-  public resetList(): void {
+  public onClickRefresh(): void {
     this.userService.findByNameStartingWith()
       .subscribe((page: Page<User>) => {
         this.updateDataSource(page);
@@ -116,7 +116,7 @@ export class ManagementComponent implements OnInit, AfterViewInit, OnDestroy {
       data: { user: this.selection.isEmpty() ? new User() : this.selected }
     });
 
-    dialogRef.afterClosed().subscribe(() => this.resetList());
+    dialogRef.afterClosed().subscribe(() => this.onClickRefresh());
   }
 
   public onClickRemove(): void {
