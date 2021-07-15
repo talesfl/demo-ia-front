@@ -3,6 +3,9 @@
     <app-demo-toolbar [title]="'User: ' + user.email">
 
         <button mat-stroked-button routerLink="email">Email</button>
+
+        <button mat-stroked-button (click)="onClickEmailKafka()">Email Kafka</button>
+
         <button mat-stroked-button routerLink="details">Details</button>
         <button mat-stroked-button routerLink="management/admin" [disabled]="!(user?.admin)">
             Management

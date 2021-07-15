@@ -1,0 +1,45 @@
+<div class="flex-row space-beetween">
+  <h2 mat-dialog-title>Email Kafka</h2>
+
+  <button mat-icon-button mat-dialog-close aria-label="Close">
+      <mat-icon>close</mat-icon>
+  </button>
+
+</div>
+
+<mat-dialog-content>
+  <form [formGroup]="formGroup" class="form-flex-column"> 
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Email to:</mat-label>
+      <input type="text" matInput [formControl]="formGroup.get('userTo')"
+      [matAutocomplete]="autoEmail" required>
+      <mat-autocomplete autoActiveFirstOption #autoEmail="matAutocomplete" [displayWith]="displayUserEmailFn">
+        <mat-option *ngFor="let option of filteredUserEmailOptions | async" [value]="option">
+          {{option.email}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Subject:</mat-label>
+      <input matInput formControlName="subject" required> 
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Content:</mat-label>
+      <textarea matInput [formControl]="formGroup.get('content')" rows="8"></textarea>
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>Close</button>
+
+  <ng-container *ngIf="isNewEmail()">
+    <button mat-stroked-button (click)="dispatchEmail()" [disabled]="this.formGroup.invalid">Send</button>
+  </ng-container>
+
+</mat-dialog-actions>

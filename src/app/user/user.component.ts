@@ -31,4 +31,8 @@ export class UserComponent {
         (error) => this.messageService.showMessage(`Cannot log out. Reason: ${error.statusText}`)
       );
   }
+
+  public onClickEmailKafka(): void {
+    
+  }
 }
