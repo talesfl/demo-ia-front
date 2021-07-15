@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -23,6 +23,7 @@ import { MaterialModule } from './material/material.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpClientXsrfModule,
     MaterialModule,
     AppRoutingModule
   ],
@@ -31,7 +32,7 @@ import { MaterialModule } from './material/material.module';
     AuthenticationService,
     AuthenticationGuard,
     AuthorizationGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

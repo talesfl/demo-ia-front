@@ -17,7 +17,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
 
     if (this.authenticationService.isAuthenticated()) {
       request = request.clone({
-        headers: this.authenticationService.authHeaders()
+        headers: this.authenticationService.tokenHeader()
       });
     }
 

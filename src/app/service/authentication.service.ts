@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, concatMap, tap } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
 import { User } from "../domain/user";
@@ -10,48 +10,55 @@ import { User } from "../domain/user";
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     
+    private readonly _X_AUTH_TOKEN: string = 'x-auth-token';
     private readonly _URL: string = `${environment.server.contextPath}/authentications`;
-    private _token: string;
+    
+    private _authToken: string;
+
     private _isAuthenticated: boolean = false;
     private _loggedUser: User;
     
-    private readonly _HEADER_AUTHORIZATION: string = 'Authorization';
-    private readonly _HEADER_WWW_AUTHENTICATE: string = 'WWW-Authenticate';
-
     constructor(private http: HttpClient) { }
 
-    public authHeaders(): HttpHeaders {
+    public tokenHeader(): HttpHeaders {
         return new HttpHeaders({
-            [this._HEADER_AUTHORIZATION]: `Basic ${this.getToken()}`,
-            [this._HEADER_WWW_AUTHENTICATE]: `Basic realm=${this.getRealm()}`
+            [this._X_AUTH_TOKEN]: this.getAuthToken(),
+            'Cache-control': 'no-cache, no-store, max-age=0, must-revalidate'
         });
     }
 
-    // TODO: quando implementar o token. será alterado
     public login(email: string, password: string): Observable<User> {
 
-        this._token = btoa(`${email}:${password}`)
-
-        return this.http.post<User>(
-            `${this._URL}/login`,
-            { email, password } as User,
-            { headers: this.authHeaders() }
-        ).pipe(
-            tap(user => {
-                this._isAuthenticated = true;
-                this._loggedUser = new User(user);
-                return of(user);
-            }),
-            catchError(error => {
-                this.setLogOutProperties();
-                return throwError(error);
-            })
-        );
+        return this.http.options(`${this._URL}/login`, { 
+            headers: { 
+                'Authorization': `Basic ${btoa(`${email}:${password}`)}`,
+                'WWW-Authenticate': `Basic realm=${this.getRealm()}`,
+                'Cache-control': 'no-cache, no-store, max-age=0, must-revalidate'
+            },
+            observe: 'response' 
+        }).pipe(
+                concatMap(res => {
+                    this._authToken = res.headers.get(this._X_AUTH_TOKEN);
+                    return this.http.post<User>(
+                        `${this._URL}/login`,
+                        { email, password },
+                        { headers: this.tokenHeader() }
+                    );
+                }),
+                tap(user => {
+                    this._isAuthenticated = true;
+                    this._loggedUser = new User(user);
+                    return of(user);
+                }),
+                catchError(error => {
+                    this.setLogOutProperties();
+                    return throwError(error);
+                })
+            );
     }
 
-    // TODO: quando implementar o token. será alterado
     public logout(): Observable<void> {
-        return this.http.get<void>(`${this._URL}/logout`, { headers: this.authHeaders() })
+        return this.http.get<void>(`${this._URL}/logout`, { headers: this.tokenHeader() })
         .pipe(
             tap(user => {
                 this.setLogOutProperties();
@@ -67,10 +74,10 @@ export class AuthenticationService {
     private setLogOutProperties() {
         this._isAuthenticated = false;
         this._loggedUser = null;
-        this._token = null;
+        this._authToken = null;
     }
 
-    public getToken(): string { return this._token; }
+    private getAuthToken(): string { return this._authToken; }
 
     public getRealm(): string { return environment.server.realm; }
 
