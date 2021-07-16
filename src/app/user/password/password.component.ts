@@ -59,7 +59,11 @@ export class PasswordComponent implements OnChanges {
 
 
   private save() {
-    const user: User = new User(this.formGroup.getRawValue());
+    const user: User = new User({
+      id: this.formGroup.get('id').value,
+      password: this.formGroup.get('password').value
+    });
+    
     this.userService.updatePassword(user)
       .subscribe(
         (user: User) => {

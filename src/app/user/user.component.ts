@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { User } from '../domain/user';
 import { AuthenticationService } from '../service/authentication.service';
 import { MessageService } from '../service/message.service';
+import { DialogEmailKafkaComponent } from './dialog-email-kafka/dialog-email-kafka.component';
 
 @Component({
   selector: 'app-user',
@@ -15,6 +17,7 @@ export class UserComponent {
 
   constructor(
     private router: Router,
+    private matDialog: MatDialog,
     private messageService: MessageService,
     private authenticationService: AuthenticationService
   ) {
@@ -33,6 +36,9 @@ export class UserComponent {
   }
 
   public onClickEmailKafka(): void {
-    
+    const dialogRef = this.matDialog.open(DialogEmailKafkaComponent, {
+      width: '60%',
+      autoFocus: false,
+    });
   }
 }

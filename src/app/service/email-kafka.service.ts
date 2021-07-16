@@ -7,7 +7,7 @@ import { Email } from '../domain/email';
 @Injectable()
 export class EmailKafkaService {
   
-  private readonly _URL: string = `${environment.server.contextPathKafka}`;
+  private readonly _URL: string = `${environment.server.contextPathKafka}/kafkas`;
   constructor(private httpClient: HttpClient) { }
 
 

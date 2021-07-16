@@ -14,7 +14,7 @@ import { UserService } from 'src/app/service/user.service';
   selector: 'app-dialog-email-kafka',
   templateUrl: './dialog-email-kafka.component.html'
 })
-export class DialogEmailComponent implements OnInit {
+export class DialogEmailKafkaComponent implements OnInit {
 
   public formGroup: FormGroup;
 
@@ -26,7 +26,7 @@ export class DialogEmailComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private messageService: MessageService,
-    private dialogRef: MatDialogRef<DialogEmailComponent>,
+    private dialogRef: MatDialogRef<DialogEmailKafkaComponent>,
     private emailKafkaService: EmailKafkaService
   ) {
     this.buildFormGroup();
@@ -69,8 +69,8 @@ export class DialogEmailComponent implements OnInit {
   public dispatchEmail(): void {
     const email: Email = new Email(this.formGroup.getRawValue());
     const observable: Observable<void> = email.userTo ?  
-    this.emailKafkaService.dispatchUserEmail(email) :
-    this.emailKafkaService.dispatchAdminEmail(email);
+    this.emailKafkaService.dispatchAdminEmail(email) :
+    this.emailKafkaService.dispatchUserEmail(email);
 
     observable.subscribe(() => {
         this.messageService.showMessage('Email sent.');

@@ -10,10 +10,12 @@ import { MessageService } from '../service/message.service';
 import { UserService } from '../service/user.service';
 import { MaterialModule } from '../material/material.module';
 import { EmailKafkaService } from '../service/email-kafka.service';
+import { DialogEmailKafkaComponent } from './dialog-email-kafka/dialog-email-kafka.component';
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    DialogEmailKafkaComponent
   ],
   imports: [
     CommonModule,
